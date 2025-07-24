@@ -1,0 +1,32 @@
+reviews:
+  path_instructions:
+    - path: "components/ui/**/*.tsx"
+      instructions: |
+        ✅ Compose UI components by wrapping internal primitives or Headless UI. Do not reimplement low-level logic.
+        ✅ Use Tailwind utility classes for styling. Do not use inline styles (`style={{}}`), CSS-in-JS, or dynamic class injection.
+        ✅ Accept and forward standard props: `className`, `children`, and valid HTML attributes.
+        ✅ Use `React.forwardRef` properly with correct typing for all components.
+        ✅ Framer Motion is allowed only with static variants and nonce support. Do not inject styles/scripts dynamically.
+        ✅ Use portals (`ReactDOM.createPortal`) for modals or overlays. Delegate focus trap logic to primitives.
+        ✅ Do not use or import third-party primitives (Radix, Headless UI, React Aria, etc.).
+        ✅ Accessibility and keyboard behavior should be handled in primitives. Do not duplicate in UI layer.
+        ✅ Ensure CSP compliance. No dynamic `<style>`, inline `style={{}}`, or unsafe event handlers.
+        ✅ Avoid logic-heavy implementations. The UI layer should remain mostly declarative and focused on composition.
+
+    - path: "components/primitives/**/*.tsx"
+      instructions: |
+        ✅ Implement unstyled, semantic, accessible primitives using only standard HTML and ARIA roles.
+        ✅ Do not use Tailwind utility classes or className strings. Use `@apply` only if absolutely necessary for tokens.
+        ✅ Accept only native HTML props and forward all valid attributes.
+        ✅ Use `React.forwardRef` with accurate typing for all primitives.
+        ✅ Accessibility is mandatory:
+          - Implement full ARIA support
+          - Support keyboard interaction (Tab, Shift+Tab, Enter, Escape, Arrow keys)
+          - Use `useId()` or equivalent for dynamic labels
+        ✅ Ensure CSP compliance:
+          - No inline styles, injected class names, or unsafe scripts
+          - Avoid `style={{}}`, `dangerouslySetInnerHTML`, or `new Function`
+        ✅ Framer Motion is allowed only with static variants and nonce support. Avoid dynamic motion values.
+        ✅ Avoid third-party primitives entirely. Build all logic internally.
+        ✅ Keep implementation minimal, logic-first, and decoupled from UI concerns.
+        ✅ Avoid direct DOM manipulation unless necessary for accessibility or measurement.

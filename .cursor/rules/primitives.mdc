@@ -1,0 +1,17 @@
+---
+globs: components/primitives/**/*.tsx
+alwaysApply: false
+---
+
+- "Use semantic HTML elements only (e.g., <button>, <input>, <dialog>) with proper roles and ARIA attributes."
+- "Primitives must be unstyled. Do not use Tailwind, inline styles, classNames, or dynamic class generation."
+- "Ensure accessibility: ARIA labeling, keyboard interaction, focus visibility, and label association."
+- "Implement keyboard support where relevant: Tab, Shift+Tab, Escape, arrow keys, etc."
+- "Expose forwardRef with correct typing for all primitives."
+- "Accept and forward native HTML props only. Keep API surface minimal."
+- "Ensure CSP safety: no scripts, no inline styles, no dynamic injections, no eval or new Function()."
+- "Use Framer Motion with static variants and nonce support _only if necessary_. Avoid dynamic motion values."
+- "Use React’s useId() or similar strategy to generate safe unique IDs. Never hardcode or randomize IDs."
+- "Avoid direct DOM manipulation unless required for a11y or control (e.g., focus, measurements)."
+- "Never import third-party UI libraries or primitives. All logic must be implemented internally."
+- "Keep primitive logic clean, minimal, and decoupled from UI or theming concerns."
