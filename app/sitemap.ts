@@ -16,19 +16,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const base = baseUrl().toString()
 
   // Create sitemap entries for all marketing pages
-  const marketingEntries = Object.values(routes.marketing).map((path) => ({
-    url: `${base}${path}`,
+  const marketingEntries = routes.marketing.map((route) => ({
+    url: `${base}${route.path}`,
     lastModified: new Date(),
     changeFrequency: "yearly" as const,
-    priority: path === routes.marketing.home ? 1 : 0.8,
+    priority: route.path === "/" ? 1 : 0.8,
   }))
 
   // Create sitemap entries for all doc pages
-  const docEntries = Object.values(routes.docs).map((path) => ({
-    url: `${base}${path}`,
+  const docEntries = routes.documentation.map((route) => ({
+    url: `${base}${route.path}`,
     lastModified: new Date(),
     changeFrequency: "yearly" as const,
-    priority: path === routes.docs.home ? 0.8 : 0.6,
+    priority: route.path === "/docs" ? 0.8 : 0.6,
   }))
 
   return [...marketingEntries, ...docEntries]

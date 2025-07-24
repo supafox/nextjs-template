@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { externalRoutes } from "@/constants/routes"
+import { externalRoutes } from "@/constants/external-routes"
 
 import { Icons } from "@/config/icons"
 import { buttonVariants } from "@/components/ui/button"
@@ -25,7 +25,7 @@ export default function Home() {
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <Link
             className={buttonVariants()}
-            href={externalRoutes.vercelDeployment}
+            href={externalRoutes.deploy}
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { externalRoutes } from "@/constants/routes"
+import { externalRoutes } from "@/constants/external-routes"
 
 import { Icons } from "@/config/icons"
 import { buttonVariants } from "@/components/ui/button"
@@ -29,20 +29,20 @@ export default function Footer() {
             </Link>
             <Link
               className={buttonVariants({ variant: "link", size: "sm" })}
-              href={externalRoutes.examples}
+              href={externalRoutes.templates}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View Next.js examples (opens in new tab)"
+              aria-label="View Next.js templates (opens in new tab)"
             >
               <Icons.window
                 className="text-muted-foreground size-4"
                 aria-hidden="true"
               />
-              Examples
+              Templates
             </Link>
             <Link
               className={buttonVariants({ variant: "link", size: "sm" })}
-              href={externalRoutes.goToNextjs}
+              href={externalRoutes.nextjs}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Visit Next.js website (opens in new tab)"

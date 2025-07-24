@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { mainNav } from "@/constants/routes"
+import { routes } from "@/constants/routes"
 import { IconMenu, IconX } from "@tabler/icons-react"
 
 import { Icons } from "@/config/icons"
@@ -29,6 +29,12 @@ export default function Nav() {
     return pathname.startsWith(href)
   }
 
+  // Combine marketing and documentation routes for navigation
+  const navigationRoutes = [
+    ...routes.marketing,
+    ...routes.documentation,
+  ].filter((route) => route.path === "/" || route.path === "/docs")
+
   return (
     <header className="border-border bg-background/95 supports-[backdrop-filter]:bg-background/60 fixed top-0 right-0 left-0 z-50 h-20 w-dvw border-b backdrop-blur">
       <div className="container mx-auto flex h-full items-center justify-between px-4">
@@ -46,16 +52,16 @@ export default function Nav() {
           role="navigation"
           aria-label="Main navigation"
         >
-          {mainNav.map((route) => (
+          {navigationRoutes.map((route) => (
             <Link
-              key={route.href}
-              href={route.href}
+              key={route.path}
+              href={route.path}
               className={`text-button-14 hover:text-foreground/80 rounded-md px-3 py-2 transition-colors ${
-                isActiveLink(route.href)
+                isActiveLink(route.path)
                   ? "text-foreground underline underline-offset-4"
                   : "text-foreground/60"
               }`}
-              aria-current={isActiveLink(route.href) ? "page" : undefined}
+              aria-current={isActiveLink(route.path) ? "page" : undefined}
             >
               {route.label}
             </Link>
@@ -97,16 +103,16 @@ export default function Nav() {
         aria-label="Mobile navigation"
       >
         <div className="container mx-auto space-y-2 px-4 py-4">
-          {mainNav.map((route) => (
+          {navigationRoutes.map((route) => (
             <Link
-              key={route.href}
-              href={route.href}
+              key={route.path}
+              href={route.path}
               className={`text-button-14 hover:bg-accent hover:text-foreground/80 focus:ring-ring block rounded-md px-3 py-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${
-                isActiveLink(route.href)
+                isActiveLink(route.path)
                   ? "bg-accent text-foreground"
                   : "text-foreground/60"
               }`}
-              aria-current={isActiveLink(route.href) ? "page" : undefined}
+              aria-current={isActiveLink(route.path) ? "page" : undefined}
               onClick={closeMenu}
             >
               {route.label}
