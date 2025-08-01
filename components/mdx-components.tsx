@@ -1,4 +1,4 @@
-import { getImageProps } from "next/image"
+import Image from "next/image"
 
 import { cn } from "@/lib/utils"
 
@@ -108,7 +108,7 @@ export const mdxComponents = {
     return (
       <pre
         className={cn(
-          "no-scrollbar bg-muted min-w-0 overflow-x-auto rounded-md px-4 py-3.5 outline-none [&:not(:first-child)]:mt-6",
+          "no-scrollbar min-w-0 overflow-x-auto px-4 py-3.5 outline-none has-[[data-highlighted-line]]:px-0 has-[[data-line-numbers]]:px-0 has-[[data-slot=tabs]]:p-0",
           className
         )}
         {...props}
@@ -117,15 +117,28 @@ export const mdxComponents = {
       </pre>
     )
   },
-  code: ({ className, ...props }: React.ComponentProps<"code">) => (
-    <code
-      className={cn(
-        "text-copy-14 bg-muted rounded-md px-2 py-1 font-mono",
-        className
-      )}
-      {...props}
-    />
-  ),
+  code: ({ className, children, ...props }: React.ComponentProps<"code">) => {
+    if (typeof children === "string") {
+      return (
+        <code
+          className={cn(
+            "bg-muted text-copy-14 relative rounded-md px-[0.3rem] py-[0.2rem] font-mono outline-none",
+            className
+          )}
+          {...props}
+        >
+          {children}
+        </code>
+      )
+    }
+
+    // Default codeblock for syntax highlighted code
+    return (
+      <code className={cn("font-mono", className)} {...props}>
+        {children}
+      </code>
+    )
+  },
   Image: ({
     src,
     className,
@@ -133,26 +146,15 @@ export const mdxComponents = {
     height,
     alt,
     ...props
-  }: React.ComponentProps<"img">) => {
-    const { props: nextProps } = getImageProps({
-      src: src as string,
-      width: Number(width),
-      height: Number(height),
-      alt: alt || "",
-      ...props,
-    })
-
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { style, ...delegated } = nextProps
-
-    return (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        className={cn("mt-6 rounded-md border", className)}
-        {...delegated}
-        alt={alt || ""}
-        loading="lazy"
-      />
-    )
-  },
+  }: React.ComponentProps<"img">) => (
+    <Image
+      src={src as string}
+      width={Number(width) || 800}
+      height={Number(height) || 600}
+      className={cn("mt-6 rounded-md border", className)}
+      alt={alt || ""}
+      loading="lazy"
+      {...props}
+    />
+  ),
 }

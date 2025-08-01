@@ -1,11 +1,18 @@
 import { defineConfig, defineDocs } from "fumadocs-mdx/config"
+import rehypePrettyCode from "rehype-pretty-code"
 
 export default defineConfig({
   mdxOptions: {
-    rehypePlugins: () => {
-      // Return empty array to disable all rehype plugins including syntax highlighting
-      // This prevents CSP violations from rehype-pretty-code
-      return []
+    rehypePlugins: (plugins) => {
+      plugins.shift()
+      plugins.push([
+        rehypePrettyCode,
+        {
+          theme: "dracula",
+        },
+      ])
+
+      return plugins
     },
   },
 })
