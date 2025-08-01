@@ -5,29 +5,22 @@ export function middleware(request: NextRequest) {
   const nonceBytes = new Uint8Array(16) // 16 bytes = 128 bits
   crypto.getRandomValues(nonceBytes)
   const nonce = Buffer.from(nonceBytes).toString("base64")
+
   const cspHeader = `
     default-src 'self';
     script-src 'strict-dynamic' 'nonce-${nonce}' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval'`
     };
-    style-src 'self' ${
-      process.env.NODE_ENV === "production"
-        ? `'nonce-${nonce}'`
-        : `'unsafe-inline'`
-    };
-    style-src-elem 'self' https://fonts.googleapis.com ${
-      process.env.NODE_ENV === "production"
-        ? `'nonce-${nonce}'`
-        : `'unsafe-inline'`
-    };
+    style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data:;
     font-src 'self';
+    connect-src 'self';
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
-`
+  `
   // Replace newline characters and spaces
   const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, " ")

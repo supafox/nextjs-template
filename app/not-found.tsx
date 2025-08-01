@@ -1,9 +1,9 @@
+import Image from "next/image"
 import Link from "next/link"
 import { IconArrowLeft } from "@tabler/icons-react"
 
 import { Icons } from "@/config/icons"
 import { buttonVariants } from "@/components/ui/button"
-import Image from "@/components/ui/image"
 
 export default function NotFound() {
   return (

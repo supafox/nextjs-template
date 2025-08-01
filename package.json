@@ -1,5 +1,5 @@
 {
-  "name": "nextjs-template.supafox.dev",
+  "name": "nextjs-template",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -14,7 +14,7 @@
     "commitlint": "commitlint --edit \"$1\""
   },
   "dependencies": {
-    "@headlessui/react": "^2.2.5",
+    "@radix-ui/react-slot": "^1.2.3",
     "@tabler/icons-react": "^3.34.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -73,8 +73,6 @@
       "^(next/(.*)$)|^(next$)",
       "<THIRD_PARTY_MODULES>",
       "",
-      "^@workspace/(.*)$",
-      "",
       "^types$",
       "^@/types/(.*)$",
       "^@/config/(.*)$",
@@ -85,7 +83,6 @@
       "^@/registry/(.*)$",
       "^@/styles/(.*)$",
       "^@/app/(.*)$",
-      "^@/www/(.*)$",
       "",
       "^[./]"
     ],
