@@ -30,8 +30,12 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files (do not commit real secrets)
 .env*
+!.env.example
+!.env.*.example
+# Optional: ignore direnv file used for local development
+.envrc
 
 # vercel
 .vercel
@@ -44,3 +48,9 @@ certificates
 
 # fumadocs
 .source
+
+# playwright
+playwright-report/
+test-results/
+blob-report/
+.env*.local

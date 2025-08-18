@@ -1,4 +1,5 @@
 import type { Metadata } from "next"
+import { brand } from "@/constants/brand"
 
 import { baseUrl } from "@/lib/utils"
 
@@ -7,13 +8,12 @@ const site = baseUrl()
 export const defaultMeta: Metadata = {
   metadataBase: site,
   title: {
-    default: "Next.js",
-    template: "%s | Next.js",
+    default: brand.name,
+    template: "%s | " + brand.name,
   },
-  description:
-    "Built on a foundation of fast, production-grade tooling. Enhanced with powerful features.",
-  authors: [{ name: "Next.js", url: site.href }],
-  creator: "Next.js",
+  description: brand.description,
+  authors: [{ name: brand.name, url: site.href }],
+  creator: process.env.NEXT_PUBLIC_TWITTER_CREATOR ?? brand.twitterHandle,
   robots: {
     index: true,
     follow: true,
@@ -26,11 +26,10 @@ export const defaultMeta: Metadata = {
     },
   },
   openGraph: {
-    title: "Next.js",
-    description:
-      "Built on a foundation of fast, production-grade tooling. Enhanced with powerful features.",
+    title: brand.name,
+    description: brand.description,
     url: site.href,
-    siteName: "Next.js",
+    siteName: brand.name,
     images: [
       {
         url: new URL("/opengraph/og-image.jpg", site).toString(),
@@ -43,11 +42,10 @@ export const defaultMeta: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Next.js",
-    description:
-      "Built on a foundation of fast, production-grade tooling. Enhanced with powerful features.",
-    site: "@nextjs",
-    creator: "@nextjs",
+    title: brand.name,
+    description: brand.description,
+    site: process.env.NEXT_PUBLIC_TWITTER_SITE ?? brand.twitterHandle,
+    creator: process.env.NEXT_PUBLIC_TWITTER_CREATOR ?? brand.twitterHandle,
     images: [
       {
         url: new URL("/opengraph/twitter-image.jpg", site).toString(),
@@ -84,7 +82,7 @@ export const defaultMeta: Metadata = {
   },
   manifest: "/web-app/manifest.json",
   appleWebApp: {
-    title: "Next.js",
+    title: brand.name,
     statusBarStyle: "black-translucent",
     capable: true,
   },

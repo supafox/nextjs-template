@@ -13,7 +13,7 @@ export default function Home() {
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
             <code className="rounded bg-black/[.05] px-1 py-0.5 font-mono dark:bg-white/[.06]">
-              app/page.tsx
+              app/(public)/page.tsx
             </code>
             .
           </li>
@@ -21,7 +21,6 @@ export default function Home() {
             Save and see your changes instantly.
           </li>
         </ol>
-
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <Link
             className={buttonVariants()}

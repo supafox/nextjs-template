@@ -11,8 +11,6 @@ import { ThemeProvider } from "@/providers/theme-provider"
 import Footer from "@/components/widgets/footer"
 import Nav from "@/components/widgets/nav"
 
-export const dynamic = "force-dynamic"
-
 export const metadata: Metadata = {
   ...defaultMeta,
 }
@@ -22,15 +20,8 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  let nonce: string | undefined
-
-  try {
-    const headersList = await headers()
-    nonce = headersList.get("x-nonce") ?? undefined
-  } catch (error) {
-    console.warn("Failed to retrieve headers:", error)
-    nonce = undefined
-  }
+  const headersList = await headers()
+  const nonce = headersList.get("x-nonce") ?? undefined
 
   return (
     <html lang="en" suppressHydrationWarning>
@@ -45,7 +36,7 @@ export default async function RootLayout({
           nonce={nonce}
         >
           <Nav />
-          <main className="min-h-screen">{children}</main>
+          {children}
           <Footer />
         </ThemeProvider>
       </body>

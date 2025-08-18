@@ -14,7 +14,7 @@ export default function NotFound() {
         alt="404 Error"
         width={500}
         height={500}
-        className="relative z-10"
+        className="relative z-10 rounded-md"
         style={{ color: "" }}
       />
       <Link

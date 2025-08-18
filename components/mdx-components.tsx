@@ -1,6 +1,14 @@
+import React from "react"
 import Image from "next/image"
 
 import { cn } from "@/lib/utils"
+
+const validateImageDimension = (value: unknown): number | null => {
+  if (!value) return null
+  if (typeof value === "number") return value > 0 ? value : null
+  const parsed = parseInt(String(value), 10)
+  return !isNaN(parsed) && parsed > 0 ? parsed : null
+}
 
 export const mdxComponents = {
   h1: ({ className, ...props }: React.ComponentProps<"h1">) => (
@@ -85,7 +93,7 @@ export const mdxComponents = {
     <div className="my-6 w-full overflow-y-auto">
       <table
         className={cn(
-          "relative w-full overflow-hidden border-none text-sm",
+          "text-copy-14 relative w-full overflow-hidden border-none",
           className
         )}
         {...props}
@@ -146,15 +154,47 @@ export const mdxComponents = {
     height,
     alt,
     ...props
-  }: React.ComponentProps<"img">) => (
-    <Image
-      src={src as string}
-      width={Number(width) || 800}
-      height={Number(height) || 600}
-      className={cn("mt-6 rounded-md border", className)}
-      alt={alt || ""}
-      loading="lazy"
-      {...props}
-    />
-  ),
+  }: React.ComponentProps<"img">) => {
+    // Validate required props
+    const isValidSrc = src && typeof src === "string" && src.trim() !== ""
+    const validWidth = validateImageDimension(width)
+    const validHeight = validateImageDimension(height)
+
+    // Fallback dimensions if invalid
+    const fallbackWidth = validWidth ?? 800
+    const fallbackHeight = validHeight ?? 600
+
+    // Handle invalid source
+    if (!isValidSrc) {
+      return (
+        <div
+          className={cn(
+            "bg-muted/50 mt-6 flex h-64 w-full items-center justify-center rounded-md border border-dashed",
+            className
+          )}
+        >
+          <div className="flex flex-col items-center gap-2 text-center">
+            <div className="text-copy-14 text-muted-foreground">
+              Invalid image source
+            </div>
+            <div className="text-copy-12 text-muted-foreground">
+              {alt || "Image"}
+            </div>
+          </div>
+        </div>
+      )
+    }
+
+    return (
+      <Image
+        src={src}
+        width={fallbackWidth}
+        height={fallbackHeight}
+        className={cn("mt-6 rounded-md border", className)}
+        alt={alt || ""}
+        loading="lazy"
+        {...props}
+      />
+    )
+  },
 }

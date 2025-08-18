@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { routes } from "@/constants/routes"
+import { homeRoute, isRouteActive, routes } from "@/constants/routes"
 import { IconMenu, IconX } from "@tabler/icons-react"
 
 import { Icons } from "@/config/icons"
@@ -22,24 +22,20 @@ export default function Nav() {
     setIsMenuOpen(false)
   }
 
-  const isActiveLink = (href: string) => {
-    if (href === "/") {
-      return pathname === "/"
-    }
-    return pathname.startsWith(href)
-  }
-
   // Combine marketing and documentation routes for navigation
   const navigationRoutes = [
     ...routes.marketing,
     ...routes.documentation,
   ].filter((route) => route.path === "/" || route.path === "/docs")
 
+  // Home route centralised in constants
+  // const homeRoute is imported
+
   return (
     <header className="border-border bg-background/95 supports-[backdrop-filter]:bg-background/60 fixed top-0 right-0 left-0 z-50 h-20 w-dvw border-b backdrop-blur">
       <div className="container mx-auto flex h-full items-center justify-between px-4">
         <Link
-          href="/"
+          href={homeRoute}
           className="flex items-center space-x-2 rounded-md"
           aria-label="Go to homepage"
         >
@@ -48,25 +44,36 @@ export default function Nav() {
 
         {/* Desktop Navigation */}
         <nav
-          className="hidden items-center gap-4 md:flex"
+          className="hidden items-center gap-12 md:flex"
           role="navigation"
           aria-label="Main navigation"
         >
-          {navigationRoutes.map((route) => (
-            <Link
-              key={route.path}
-              href={route.path}
-              className={`text-button-14 hover:text-foreground/80 rounded-md px-3 py-2 transition-colors ${
-                isActiveLink(route.path)
-                  ? "text-foreground underline underline-offset-4"
-                  : "text-foreground/60"
-              }`}
-              aria-current={isActiveLink(route.path) ? "page" : undefined}
-            >
-              {route.label}
-            </Link>
-          ))}
-          <ThemeToggle />
+          <div className="flex items-center gap-4">
+            {navigationRoutes.map((route) => {
+              const active = isRouteActive(
+                pathname,
+                route.path,
+                route.allowSubpaths
+              )
+              return (
+                <Link
+                  key={route.path}
+                  href={route.path}
+                  className={`text-button-14 hover:text-foreground/80 rounded-md px-3 py-2 transition-colors ${
+                    active
+                      ? "text-foreground underline underline-offset-4"
+                      : "text-foreground/60"
+                  }`}
+                  aria-current={active ? "page" : undefined}
+                >
+                  {route.label}
+                </Link>
+              )
+            })}
+          </div>
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+          </div>
         </nav>
 
         {/* Mobile Menu Button */}
@@ -103,21 +110,26 @@ export default function Nav() {
         aria-label="Mobile navigation"
       >
         <div className="container mx-auto space-y-2 px-4 py-4">
-          {navigationRoutes.map((route) => (
-            <Link
-              key={route.path}
-              href={route.path}
-              className={`text-button-14 hover:bg-accent hover:text-foreground/80 focus:ring-ring block rounded-md px-3 py-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${
-                isActiveLink(route.path)
-                  ? "bg-accent text-foreground"
-                  : "text-foreground/60"
-              }`}
-              aria-current={isActiveLink(route.path) ? "page" : undefined}
-              onClick={closeMenu}
-            >
-              {route.label}
-            </Link>
-          ))}
+          {navigationRoutes.map((route) => {
+            const active = isRouteActive(
+              pathname,
+              route.path,
+              route.allowSubpaths
+            )
+            return (
+              <Link
+                key={route.path}
+                href={route.path}
+                className={`text-button-14 hover:bg-accent hover:text-foreground/80 focus:ring-ring block rounded-md px-3 py-2 transition-colors focus:ring-2 focus:ring-offset-2 focus:outline-none ${
+                  active ? "bg-accent text-foreground" : "text-foreground/60"
+                }`}
+                aria-current={active ? "page" : undefined}
+                onClick={closeMenu}
+              >
+                {route.label}
+              </Link>
+            )
+          })}
         </div>
       </nav>
     </header>

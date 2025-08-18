@@ -1,47 +1,44 @@
 import { NextRequest, NextResponse } from "next/server"
 
-export function middleware(request: NextRequest) {
-  // Generate a fixed-length random byte array for CSP nonce
-  const nonceBytes = new Uint8Array(16) // 16 bytes = 128 bits
+export async function middleware(request: NextRequest) {
+  // Generate a random CSP nonce
+  const nonceBytes = new Uint8Array(16)
   crypto.getRandomValues(nonceBytes)
-  const nonce = Buffer.from(nonceBytes).toString("base64")
+  // Convert to base64 without using Buffer (Edge runtime compatible)
+  const nonce = btoa(
+    Array.from(nonceBytes, (byte) => String.fromCharCode(byte)).join("")
+  )
 
   const cspHeader = `
     default-src 'self';
     script-src 'strict-dynamic' 'nonce-${nonce}' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval'`
     };
-    style-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data:;
     font-src 'self';
-    connect-src 'self';
+    connect-src 'self' https://vitals.vercel-insights.com https://cdn.vercel-insights.com;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
     frame-ancestors 'none';
     upgrade-insecure-requests;
   `
-  // Replace newline characters and spaces
-  const contentSecurityPolicyHeaderValue = cspHeader
     .replace(/\s{2,}/g, " ")
     .trim()
 
-  const requestHeaders = new Headers(request.headers)
-  requestHeaders.set("x-nonce", nonce)
-  requestHeaders.set(
-    "Content-Security-Policy",
-    contentSecurityPolicyHeaderValue
-  )
+  // Clone request headers and set x-nonce so Server Components can read it
+  const forwardedRequestHeaders = new Headers(request.headers)
+  forwardedRequestHeaders.set("x-nonce", nonce)
 
+  // For normal flows, pass the cloned headers (with nonce) forward
   const response = NextResponse.next({
-    request: {
-      headers: requestHeaders,
-    },
+    request: { headers: forwardedRequestHeaders },
   })
-  response.headers.set(
-    "Content-Security-Policy",
-    contentSecurityPolicyHeaderValue
-  )
+
+  // Set security headers on the response
+  response.headers.set("x-nonce", nonce)
+  response.headers.set("Content-Security-Policy", cspHeader)
 
   return response
 }
