@@ -115,7 +115,7 @@ export const mdxComponents = {
       return (
         <code
           className={cn(
-            "bg-muted copy-14 relative rounded-md px-[0.3rem] py-[0.2rem] font-mono outline-none",
+            "bg-muted copy-14 relative rounded-md px-[0.3rem] py-[0.2rem] font-mono break-words outline-none",
             className
           )}
           {...props}
@@ -162,7 +162,7 @@ export const mdxComponents = {
             <div className="copy-14 text-muted-foreground">
               Invalid image source
             </div>
-            <div className="copy-12 text-muted-foreground">
+            <div className="copy-14 text-muted-foreground">
               {alt || "Image"}
             </div>
           </div>

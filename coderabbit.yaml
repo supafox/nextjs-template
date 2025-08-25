@@ -48,20 +48,24 @@ reviews:
 
     - path: "app/"
       instructions: |
-        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`).
-        ❌ Do not use Tailwind's built-in typography utilities like `text-*`, `font-*`, `leading-*`, or `tracking-*` classes directly.
+        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`) for type scale, weight, tracking and line-height.
+        ❌ Do not use Tailwind's built-in typography sizing/weight/spacing utilities such as `text-[size]`, `font-*`, `leading-*`, or `tracking-*` directly.
+        ✅ Colour utilities (e.g., `text-foreground`, `text-muted-foreground`) remain allowed.
 
     - path: "components/"
       instructions: |
-        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`).
-        ❌ Do not use Tailwind's built-in typography utilities like `text-*`, `font-*`, `leading-*`, or `tracking-*` classes directly.
+        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`) for type scale, weight, tracking and line-height.
+        ❌ Do not use Tailwind's built-in typography sizing/weight/spacing utilities such as `text-[size]`, `font-*`, `leading-*`, or `tracking-*` directly.
+        ✅ Colour utilities (e.g., `text-foreground`, `text-muted-foreground`) remain allowed.
 
     - path: "features/"
       instructions: |
-        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`).
-        ❌ Do not use Tailwind's built-in typography utilities like `text-*`, `font-*`, `leading-*`, or `tracking-*` classes directly.
+        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`) for type scale, weight, tracking and line-height.
+        ❌ Do not use Tailwind's built-in typography sizing/weight/spacing utilities such as `text-[size]`, `font-*`, `leading-*`, or `tracking-*` directly.
+        ✅ Colour utilities (e.g., `text-foreground`, `text-muted-foreground`) remain allowed.
 
     - path: "components/widgets/"
       instructions: |
-        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`).
-        ❌ Do not use Tailwind's built-in typography utilities like `text-*`, `font-*`, `leading-*`, or `tracking-*` classes directly.
+        ✅ Use only the typography utility classes defined in `globals.css` (e.g., `heading-*`, `copy-*`, `button-*`, `label-*`) for type scale, weight, tracking and line-height.
+        ❌ Do not use Tailwind's built-in typography sizing/weight/spacing utilities such as `text-[size]`, `font-*`, `leading-*`, or `tracking-*` directly.
+        ✅ Colour utilities (e.g., `text-foreground`, `text-muted-foreground`) remain allowed.
