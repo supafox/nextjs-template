@@ -38,10 +38,7 @@ export const mdxComponents = {
     <h6 className={cn("heading-20 mt-4 scroll-m-28", className)} {...props} />
   ),
   a: ({ className, ...props }: React.ComponentProps<"a">) => (
-    <a
-      className={cn("font-medium underline underline-offset-4", className)}
-      {...props}
-    />
+    <a className={cn("underline underline-offset-4", className)} {...props} />
   ),
   p: ({ className, ...props }: React.ComponentProps<"p">) => (
     <p
@@ -50,7 +47,7 @@ export const mdxComponents = {
     />
   ),
   strong: ({ className, ...props }: React.HTMLAttributes<HTMLElement>) => (
-    <strong className={cn("font-medium", className)} {...props} />
+    <strong className={cn("copy-14-semibold", className)} {...props} />
   ),
   ul: ({ className, ...props }: React.ComponentProps<"ul">) => (
     <ul className={cn("my-6 ml-6 list-disc", className)} {...props} />
@@ -92,7 +89,10 @@ export const mdxComponents = {
     />
   ),
   th: ({ className, ...props }: React.ComponentProps<"th">) => (
-    <th className={cn("px-4 py-2 text-left font-bold", className)} {...props} />
+    <th
+      className={cn("copy-14-semibold px-4 py-2 text-left", className)}
+      {...props}
+    />
   ),
   td: ({ className, ...props }: React.ComponentProps<"td">) => (
     <td className={cn("px-4 py-2", className)} {...props} />

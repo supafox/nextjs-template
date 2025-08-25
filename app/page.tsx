@@ -10,16 +10,14 @@ export default function Home() {
       <div className="row-start-2 flex flex-col items-center gap-[32px] sm:items-start">
         <Icons.next className="w-45" />
         <ol className="list-inside list-decimal text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
+          <li className="mb-2">
             Get started by editing{" "}
             <code className="rounded bg-black/[.05] px-1 py-0.5 font-mono dark:bg-white/[.06]">
               app/(public)/page.tsx
             </code>
             .
           </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
+          <li>Save and see your changes instantly.</li>
         </ol>
         <div className="flex flex-col items-center gap-4 sm:flex-row">
           <Link

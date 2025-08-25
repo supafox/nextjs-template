@@ -265,9 +265,19 @@
   font-size: clamp(0.875rem, 1.5vw, 1rem);
 }
 
+@utility copy-16-semibold {
+  @apply font-semibold;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
 @utility copy-14 {
   @apply font-normal;
   font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+}
+
+@utility copy-14-semibold {
+  @apply font-semibold;
+  font-size: clamp(0.8125rem, 1.25vw, 0.875rem);
 }
 
 @utility copy-12 {
