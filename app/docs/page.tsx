@@ -8,7 +8,7 @@ export default function Docs() {
   const tree = source.pageTree
 
   return (
-    <div className="container mx-auto flex flex-col gap-16 pt-36 pb-20">
+    <div className="container mx-auto flex min-h-screen flex-col gap-16 pt-36 pb-20">
       <div className="flex flex-col">
         <h1 className="heading-56">Docs</h1>
         <p className="copy-20 text-muted-foreground">
